@@ -26,7 +26,7 @@ class CharacterController extends Controller
       
   }
 
-  public function ShowOneCharacter($id)
+  public function showOneCharacter($id)
   {
       $responding = array(); 
       $character = Character::find($id);
