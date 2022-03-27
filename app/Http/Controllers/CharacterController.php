@@ -31,7 +31,7 @@ class CharacterController extends Controller
       $responding = array(); 
       $character = Character::find($id);
       $ageTotal = $character->age;
-      $no_of_hits = count($character);
+      $no_of_hits = 1;
       $responding["Characters"] = $character;
       $responding["No_of_matching_characters"] = $no_of_hits;
       $responding["Total_age_of_characters"] = $ageTotal;
