@@ -12,14 +12,15 @@ class BookController extends Controller
 {
   //
   public function fetch()
-  {
+  {  
+    set_time_limit(400);
     $response = Http::get('https://anapioficeandfire.com/api/books');
     $apibooks = json_decode($response->body());
      
     foreach($apibooks as $apibook){
-       /*$results = DB::table('books')->where('name',$apibook->name)->value('name');
+       $results = DB::table('books')->where('name',$apibook->name)->value('name');
         //$result = DB::select(select name from books where name=$apibook->name);
-       if ($results == 0) {  */
+       if ($results == 0) {  
         $book = new Book;
         $book->name = $apibook->name;
         $book->authors = $apibook->authors[0];
@@ -40,7 +41,7 @@ class BookController extends Controller
             $bookcharacter = new Character;
             $bookcharacter->name = $apicharacter->name;
             $bookcharacter->gender = $apicharacter->gender;
-            $bookcharacter->age   = (intval($apicharacter->born) - intval($apicharacter->died));
+            $bookcharacter->age   = (intval($apicharacter->died) - intval($apicharacter->born));
             $bookcharacter->save();
 
             $book->characters()->attach($bookcharacter);
@@ -48,22 +49,17 @@ class BookController extends Controller
               continue;
             }
         }
-      /*  DB::commit();
-    
-      } catch(Exception $e){
-    
-      DB::rollback();
-        }   
+         
         } else {
             continue;
         
         }
-  */
+
         }
         return "DONE";
         
         
-        }
+   }
   
   public function sortBooks(Request $request){
       return Book::sorter($request)->get();
