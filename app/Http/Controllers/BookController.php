@@ -81,7 +81,7 @@ class BookController extends Controller
     return response()->json($resultbooks);
   } 
 
-  public function showOneBook()
+  public function showOneBook($id)
   {
       return response()->json(Book::find($id));
   }
