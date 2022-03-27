@@ -12,42 +12,63 @@ class CharacterController extends Controller
   //
   public function showAllCharacters(Request $request)
   {
-    
-    return response()->json(Character::all());
+      $responding = array();
+      $ageTotal = 0;
+      $characters = Character::all();
+      $no_of_hits = count($characters);
+      foreach($characters as $character){
+          $ageTotal += $character->age;
+      }
+      $responding["Characters"] = $characters;
+      $responding["No_of_matching_characters"] = $no_of_hits;
+      $responding["Total_age_of_characters"] = $ageTotal;
+      return response()->json($responding);
+      
   }
 
   public function ShowOneCharacter($id)
   {
-      return response()->json(Character::find($id));
+      $responding = array(); 
+      $character = Character::find($id);
+      $ageTotal = $character->age;
+      $no_of_hits = count($character);
+      $responding["Characters"] = $character;
+      $responding["No_of_matching_characters"] = $no_of_hits;
+      $responding["Total_age_of_characters"] = $ageTotal;
+      return response()->json($responding);
   }
 
-  public function create(Request $request)
-  {
-      $character = Character::create($request->all());
-      return response()->json($character, 201);
-  }
 
-  public function update($id, Request $request)
-  {
-      $character = Character::findOrFail($id);
-      $character->update($request->all());
-
-      return response()-> json($character, 200);
-  }
-
-  public function delete($id)
-  {
-      Character::findOrFail($id)->delete();
-      return response('Deleted Successfully', 200);
-  }
   public function showFilteredCharacters(Request $request)
   {
-      return Character::filter($request)->get();
+    $responding = array();
+    $ageTotal = 0;
+    $characters = Character::filter($request)->get();
+    $no_of_hits = count($characters);
+    foreach($characters as $character){
+        $ageTotal += $character->age;
+    }
+    $responding["Characters"] = $characters;
+    $responding["No_of_matching_characters"] = $no_of_hits;
+    $responding["Total_age_of_characters"] = $ageTotal;
+    return response()->json($responding);
+
   }
 
   public function sortCharacters(Request $request)
   {
-      return Character::sorter($request)->get();
+      
+      $responding = array();
+      $ageTotal = 0;
+      $characters = Character::sorter($request)->get();
+      $no_of_hits = count($characters);
+      foreach($characters as $character){
+          $ageTotal += $character->age;
+      }
+      $responding["Characters"] = $characters;
+      $responding["No_of_matching_characters"] = $no_of_hits;
+      $responding["Total_age_of_characters"] = $ageTotal;
+      return response()->json($responding);
   }
    
 }

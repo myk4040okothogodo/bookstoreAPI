@@ -4,6 +4,10 @@ namespace App\Models;
 
 //use Kyslik\ColumnSortable\Sortable;
 use Illuminate\Database\Eloquent\Model;
+use App\Sorters\CharacterSorter;
+use Illuminate\Database\Eloquent\Builder;
+
+
 
 class Book extends Model
 {
@@ -41,4 +45,9 @@ class Book extends Model
    {
        return $this->hasMany(Comment::class);
    }
+
+  public function scopeSorter(Builder $builder, $request)
+  {
+      return (new CharacterSorter($request))->sorter($builder);
+  }
 }

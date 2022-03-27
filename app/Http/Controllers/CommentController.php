@@ -12,7 +12,11 @@ class CommentController extends Controller
   //
   public function showAllComments()
   {
-      return response()->json(Comment::all());
+    $resultComments = DB::table('comments')->orderBy('created_at', 'desc');
+    foreach ($resultComments as $resultComment){
+          $resultComment->content = Str::limit($resultComment->content, 500);
+      }  
+    return response()->json($resultComments);
   }
   public function showOneComment($id)
   {

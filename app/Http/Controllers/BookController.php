@@ -64,7 +64,12 @@ class BookController extends Controller
         
         
         }
-          
+  
+  public function sortBooks(Request $request){
+      return Book::sorter($request)->get();
+  
+  }
+
   public function showAllBooks()
   {
 
@@ -83,12 +88,6 @@ class BookController extends Controller
   public function showOneBook()
   {
       return response()->json(Book::find($id));
-  }
-
-  public function create(Request $request)
-  {
-      $book = Book::create($request->all());
-      return response()->json($author, 201);
   }
     
 }

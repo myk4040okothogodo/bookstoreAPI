@@ -22,14 +22,15 @@ $router->group(['prefix' => 'api'], function () use ($router) {
     //endpoint for fetching data from external API
     $router->get('fetch', ['uses'  => 'BookController@fetch']);
 
-    // endpoints for books  
+    // endpoints for books
+    $router->get('sortbooks',  ['uses' => 'BookController@sortBooks']);  
     $router->get('books',      ['uses' => 'BookController@showAllBooks']);
     $router->get('books/{id}', ['uses' => 'BookController@showOneBook']);
     
 
     //endpoints for characters
-    $router->get('sortcharacters',  ['uses' => 'CharacterController@sortCharacters']);
-    $router->get('filtercharacters',  ['uses' => 'CharacterController@showFilteredCharacters']);
+    $router->get('sortcharacters',      ['uses' => 'CharacterController@sortCharacters']);
+    $router->get('filtercharacters',      ['uses' => 'CharacterController@showFilteredCharacters']);
     $router->get('characters',      ['uses' =>'CharacterController@showAllCharacters']);
     $router->get('characters/{id}', ['uses' => 'CharacterController@showOneCharacter']);
     
