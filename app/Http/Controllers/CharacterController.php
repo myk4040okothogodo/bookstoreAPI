@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Http;
 class CharacterController extends Controller
 {
   //
-  public function showAllCharacters(Request $request)
+  public function showAllCharacters()
   {
       $responding = array();
       $ageTotal = 0;
