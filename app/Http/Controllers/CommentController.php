@@ -13,9 +13,9 @@ class CommentController extends Controller
   public function showAllComments()
   {
     $resultComments = DB::table('comments')->orderBy('created_at', 'desc');
-    foreach ($resultComments as $resultComment){
-          $resultComment->content = Str::limit($resultComment->content, 500);
-      }  
+    //foreach ($resultComments as $resultComment){
+     //     $resultComment->content = Str::limit($resultComment->content, 500);
+      //}  
     return response()->json($resultComments);
   }
   public function showOneComment($id)
